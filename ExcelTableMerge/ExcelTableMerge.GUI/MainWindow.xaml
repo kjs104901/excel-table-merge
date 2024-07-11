@@ -1,0 +1,58 @@
+﻿<Window x:Class="ExcelTableMerge.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExcelTableMerge.GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:fastwpfgrid="clr-namespace:FastWpfGrid;assembly=FastWpfGrid">
+    <Grid Background="#222222">
+        <TabControl x:Name="tabControl">
+            <TabItem Header="TabItem">
+                <Grid Background="#222222">
+                    <ui:SymbolIcon Symbol="Fluent24"/>
+                    <ui:TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="63,61,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#222222">
+                    <ui:SymbolIcon Symbol="Fluent24"/>
+                    <ui:TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="63,61,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#222222">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Use clear type" x:Name="chbClearType1" IsChecked="True" />
+                        <CheckBox Content="Is transposed" x:Name="chbIsTransposed1" />
+                        <CheckBox Content="Hide column 3" x:Name="chbHideColumn3" Click="columnsCfgChanged" />
+                        <CheckBox Content="Freeze column 5" x:Name="chbFreezeColumn5" Click="columnsCfgChanged" />
+                    </StackPanel>
+
+                    <fastwpfgrid:FastGridControl x:Name="SrcDataGrid" Grid.Row="1" Margin="1,10,1,1"
+                        IsTransposed="{Binding IsChecked, ElementName=chbIsTransposed1, Mode=TwoWay}"
+                        UseClearType="{Binding IsChecked, ElementName=chbClearType1}"
+                        IsReadOnly="True"
+                        SizeChanged="DataGrid_SizeChanged"
+                        SelectedCellsChanged="DataGrid_SelectedCellsChanged"
+                        AllowDrop="True"
+                        Tag="0"
+                        RowHeightReserve="0"
+                        >
+                        <fastwpfgrid:FastGridControl.ContextMenu>
+                            <ContextMenu>
+                            </ContextMenu>
+                        </fastwpfgrid:FastGridControl.ContextMenu>
+
+                    </fastwpfgrid:FastGridControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
